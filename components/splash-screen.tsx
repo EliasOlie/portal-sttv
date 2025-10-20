@@ -1,29 +1,29 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import Image from "next/image"
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
 export function SplashScreen() {
-  const [isVisible, setIsVisible] = useState(true)
+  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
     // Check if splash has been shown in this session
-    const hasSeenSplash = sessionStorage.getItem("hasSeenSplash")
+    const hasSeenSplash = sessionStorage.getItem("hasSeenSplash");
 
     if (hasSeenSplash) {
-      setIsVisible(false)
-      return
+      setIsVisible(false);
+      return;
     }
 
     // Show splash for 2.5 seconds
     const timer = setTimeout(() => {
-      setIsVisible(false)
-      sessionStorage.setItem("hasSeenSplash", "true")
-    }, 2500)
+      setIsVisible(false);
+      sessionStorage.setItem("hasSeenSplash", "true");
+    }, 1500);
 
-    return () => clearTimeout(timer)
-  }, [])
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <AnimatePresence>
@@ -73,5 +73,5 @@ export function SplashScreen() {
         </motion.div>
       )}
     </AnimatePresence>
-  )
+  );
 }
