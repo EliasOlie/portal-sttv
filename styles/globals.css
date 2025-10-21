@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@plugin "@tailwindcss/typography";
 @import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
@@ -74,6 +75,51 @@
   --sidebar-ring: oklch(0.439 0 0);
 }
 
+@layer components {
+  .prose h1 {
+    @apply text-4xl font-bold text-[#563536] mt-10 mb-6 tracking-tight;
+  }
+  .prose h2 {
+    @apply text-3xl font-semibold text-[#563536] mt-8 mb-4 tracking-tight;
+  }
+  .prose h3 {
+    @apply text-2xl font-semibold text-[#563536] mt-6 mb-3 tracking-tight;
+  }
+  .prose p {
+    @apply my-5 text-lg leading-7 text-[#333];
+  }
+  .prose a {
+    @apply text-blue-600 hover:underline break-words;
+  }
+  .prose img {
+    @apply rounded-lg shadow-md my-8;
+  }
+  .prose blockquote {
+    @apply border-l-4 border-[#D4A017] pl-6 italic my-8 text-[#666] bg-[#f9f9f9] py-4 pr-4 rounded-r-lg;
+  }
+  .prose pre {
+    @apply bg-[#f3f3f3] p-6 rounded-lg my-8 overflow-x-auto border border-[#ddd];
+  }
+  .prose code {
+    @apply font-mono text-sm bg-[#eee] px-1.5 py-0.5 rounded text-[#333];
+  }
+}
+
+
+
+/* Animações de Fade In */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @theme inline {
   --font-sans: 'Geist', 'Geist Fallback';
   --font-mono: 'Geist Mono', 'Geist Mono Fallback';
@@ -115,6 +161,8 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -122,4 +170,8 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+* {
+  body: black;
 }
