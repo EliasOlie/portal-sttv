@@ -15,8 +15,6 @@ interface PostPageProps {
 
 // Gerar metadados dinâmicos baseados no post
 export async function generateMetadata({ params }: PostPageProps) {
-  const baseUrl =
-    process.env.NEXT_PUBLIC_SITE_URL || "https://www.portalsttv.com.br";
   const slug = await params.slug;
   const post = await getPostBySlug(decodeURIComponent(slug));
 
@@ -26,10 +24,6 @@ export async function generateMetadata({ params }: PostPageProps) {
       description: "O artigo que você está procurando não foi encontrado.",
     };
   }
-
-  const imageUrl = post?.coverImage?.startsWith("http")
-    ? post.coverImage
-    : `${baseUrl}${post?.coverImage}`;
 
   return {
     title: post?.title,
@@ -43,7 +37,7 @@ export async function generateMetadata({ params }: PostPageProps) {
       authors: [post?.authorId],
       images: [
         {
-          url: imageUrl,
+          url: post?.coverImage,
           width: 1200,
           height: 630,
           alt: post?.title,
@@ -55,7 +49,7 @@ export async function generateMetadata({ params }: PostPageProps) {
       card: "summary_large_image",
       title: post?.seoTitle || post?.title,
       description: post?.seoDescription,
-      images: [imageUrl],
+      images: [post?.coverImage],
     },
   };
 }
